@@ -25,4 +25,4 @@ jobs:
           TOKEN: ${{ secrets.TOKEN }}
         run: |
           yarn
-          node update.js
+          node src/update.js
