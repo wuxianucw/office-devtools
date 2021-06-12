@@ -12,16 +12,18 @@ if (!appId || !appSecret || !appToken) {
 actions.setSecret(appSecret);
 actions.setSecret(appToken);
 
-const [ghToken, ghRepo] = [process.env.GITHUB_TOKEN, process.env.GITHUB_REPO];
-if (!ghToken || !ghRepo) {
+const [ghToken, _ghRepo] = [process.env.GITHUB_TOKEN, process.env.GITHUB_REPO];
+if (!ghToken || !_ghRepo) {
     actions.setFailed("Incorrect github info.");
     process.exit(1);
 }
+const [ghOwner, ghRepo] = _ghRepo.split("/");
 
 const octokit = github.getOctokit(ghToken);
 
 async function main() {
-    const res = await octokit.request('GET /repos/{repo}/actions/secrets/public-key', {
+    const res = await octokit.request('GET /repos/{owner}/{repo}/actions/secrets/public-key', {
+        owner: ghOwner,
         repo: ghRepo
     });
     if (res.status !== 200) {
@@ -34,7 +36,8 @@ async function main() {
         throw new Error("Unable to get refresh token.");
     }
 
-    await octokit.request('PUT /repos/{repo}/actions/secrets/{secret_name}', {
+    await octokit.request('PUT /repos/{owner}/{repo}/actions/secrets/{secret_name}', {
+        owner: ghOwner,
         repo: ghRepo,
         secret_name: 'TOKEN',
         encrypted_value: encrypt(publicKey, newToken),
