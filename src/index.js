@@ -60,7 +60,7 @@ if (!appId || !appSecret || !appToken) {
 actions.setSecret(appSecret);
 actions.setSecret(appToken);
 
-const reqList = CONFIG.RANDOM_ORDER ? requiredList.concat(shuffle(optionalList).slice(0, 6)) : originalList;
+const reqList = CONFIG.RANDOM_ORDER ? shuffle(requiredList.concat(shuffle(optionalList).slice(0, 6))) : originalList;
 
 async function main() {
     const accessToken = (await func.getToken(appId, appSecret, appToken)).access_token;
