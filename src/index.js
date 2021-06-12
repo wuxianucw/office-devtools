@@ -45,7 +45,7 @@ if (!appId || !appSecret || !appToken) {
 actions.setSecret(appSecret);
 actions.setSecret(appToken);
 
-let reqList = CONFIG.RANDOM_ORDER ? requiredList.concat(shuffle(optionalList).slice(0, 6)) : originalList;
+let reqList = CONFIG.RANDOM_ORDER ? shuffle(requiredList.concat(shuffle(optionalList).slice(0, 6))) : originalList;
 
 async function main() {
     const accessToken = (await func.getToken(appId, appSecret, appToken)).access_token;
@@ -56,7 +56,6 @@ async function main() {
     actions.info(`Will perform ${CONFIG.ROUND} rounds of operations for test...`);
     for (let i = 1; i <= CONFIG.ROUND; i++) {
         actions.info(`Round ${i}:`);
-        reqList = shuffle(reqList);
         if (CONFIG.RANDOM_DELAY.ROUND.ON) {
             const t = getRandomInt(CONFIG.RANDOM_DELAY.ROUND.RANGE[0], CONFIG.RANDOM_DELAY.ROUND.RANGE[1] + 1);
             actions.info(`Wait ${t}ms...`);
@@ -77,6 +76,9 @@ async function main() {
                     console.log(res.body);
                 }
             }
+        }
+        if (CONFIG.RANDOM_ORDER) {
+            reqList = shuffle(requiredList.concat(shuffle(optionalList).slice(0, 6)));
         }
     }
 }
