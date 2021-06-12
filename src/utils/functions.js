@@ -12,7 +12,7 @@ module.exports = {
                 client_secret: secret,
                 redirect_uri: "http://localhost:53682/"
             });
-        return res.body.access_token;
+        return res.body;
     },
     async request(url, token) {
         const res = await request

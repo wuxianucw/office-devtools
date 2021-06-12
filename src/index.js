@@ -1,4 +1,3 @@
-const process = require('process');
 const actions = require('@actions/core');
 const func = require('./utils/functions');
 const { shuffle, getRandomInt } = require('./utils/algorithm');
@@ -64,7 +63,7 @@ actions.setSecret(appToken);
 const reqList = CONFIG.RANDOM_ORDER ? requiredList.concat(shuffle(optionalList).slice(0, 6)) : originalList;
 
 async function main() {
-    const accessToken = await func.getToken(appId, appSecret, appToken);
+    const accessToken = (await func.getToken(appId, appSecret, appToken)).access_token;
     if (!accessToken) {
         throw new Error("Unable to get access token.");
     }
