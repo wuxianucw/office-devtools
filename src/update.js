@@ -12,12 +12,13 @@ if (!appId || !appSecret || !appToken) {
 actions.setSecret(appSecret);
 actions.setSecret(appToken);
 
-const [ghToken, _ghRepo] = [process.env.GITHUB_TOKEN, process.env.GITHUB_REPO];
+const [ghToken, _ghRepo] = [process.env.GH_TOKEN, process.env.GITHUB_REPO];
 if (!ghToken || !_ghRepo) {
     actions.setFailed("Incorrect github info.");
     process.exit(1);
 }
 const [ghOwner, ghRepo] = _ghRepo.split("/");
+actions.setSecret(ghToken);
 
 const octokit = github.getOctokit(ghToken);
 
