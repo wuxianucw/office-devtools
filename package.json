@@ -1,0 +1,20 @@
+{
+  "name": "office-devtools",
+  "version": "0.1.0",
+  "description": "Little tests for Microsoft Office developers. Personally using.",
+  "main": "src/index.js",
+  "repository": "https://github.com/wuxianucw/office-devtools.git",
+  "author": "wuxianucw <x-wuxian@qq.com>",
+  "license": "Unlicense",
+  "scripts": {
+    "start": "node .",
+    "lint": "yarn run eslint ."
+  },
+  "dependencies": {
+    "@actions/core": "^1.4.0",
+    "superagent": "^6.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.28.0"
+  }
+}
