@@ -85,9 +85,9 @@ async function main() {
             }
             const res = await func.request(url, accessToken);
             if (res.status === 200) {
-                actions.info(`[${j + 1}] request(${url}) succeeded.`);
+                actions.info(`[${+j + 1}] request(${url}) succeeded.`);
             } else {
-                actions.error(`[${j + 1}] request(${url}) failed with status code ${res.status}.`);
+                actions.error(`[${+j + 1}] request(${url}) failed with status code ${res.status}.`);
                 if (CONFIG.DEBUG) {
                     console.log(res.body);
                 }
