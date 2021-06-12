@@ -1,6 +1,7 @@
 const actions = require('@actions/core');
 const func = require('./utils/functions');
 const { shuffle, getRandomInt } = require('./utils/algorithm');
+const CONFIG = require('./config');
 
 const API_LIST = [
     "https://graph.microsoft.com/v1.0/me/",
@@ -35,22 +36,6 @@ const API_LIST = [
 const requiredList = [0, 1, 5, 6, 20, 21];
 const optionalList = [...API_LIST.keys()].filter(v => !(v in requiredList));
 const originalList = [5, 9, 8, 1, 20, 24, 23, 6, 21, 22];
-
-const CONFIG = {
-    ROUND: 3,
-    RANDOM_DELAY: {
-        ROUND: {
-            ON: true,
-            RANGE: [500, 3000]
-        },
-        REQ: {
-            ON: true,
-            RANGE: [100, 1000]
-        }
-    },
-    RANDOM_ORDER: true,
-    DEBUG: true
-};
 
 const [appId, appSecret, appToken] = [process.env.APP_ID, process.env.APP_SECRET, process.env.TOKEN];
 if (!appId || !appSecret || !appToken) {

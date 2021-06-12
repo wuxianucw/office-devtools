@@ -2,6 +2,7 @@ const actions = require('@actions/core');
 const github = require('@actions/github');
 const func = require('./utils/functions');
 const { encrypt } = require('./utils/algorithm');
+const CONFIG = require('./config');
 
 const [appId, appSecret, appToken] = [process.env.APP_ID, process.env.APP_SECRET, process.env.TOKEN];
 if (!appId || !appSecret || !appToken) {
@@ -43,4 +44,7 @@ async function main() {
 
 main().catch((e) => {
     actions.setFailed(e);
+    if (CONFIG.DEBUG) {
+        console.log(e);
+    }
 });
