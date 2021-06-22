@@ -34,7 +34,7 @@ const API_LIST = [
     "https://graph.microsoft.com/beta/me/messages?$select=internetMessageHeaders&$top"
 ];
 const requiredList = [0, 1, 5, 6, 20, 21];
-const optionalList = [...API_LIST.keys()].filter(v => !(v in requiredList));
+const optionalList = [...API_LIST.keys()].filter(v => requiredList.indexOf(v) === -1);
 const originalList = [5, 9, 8, 1, 20, 24, 23, 6, 21, 22];
 
 const [appId, appSecret, appToken] = [process.env.APP_ID, process.env.APP_SECRET, process.env.TOKEN];
