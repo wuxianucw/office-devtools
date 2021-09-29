@@ -15,7 +15,7 @@ module.exports = {
                 });
             return res.body;
         } catch (err) {
-            return err;
+            throw new Error(err);
         }
     },
     async request(url, token) {
